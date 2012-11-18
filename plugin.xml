@@ -2,6 +2,18 @@
 <?eclipse version="3.7"?>
 <plugin>
     <extension point="org.eclipse.equinox.http.registry.servlets">
-        <servlet alias="/welcome" class="ai.svl.WelcomeServlet" />
+        <servlet alias="/" class="ai.svl.WelcomeServlet" />
+    </extension>
+    <extension
+          id="product"
+          point="org.eclipse.core.runtime.products">
+       <product
+             application="org.eclipse.ant.ui.antRunner"
+             name="aw">
+          <property
+                name="appName"
+                value="aw">
+          </property>
+       </product>
     </extension>
 </plugin>
