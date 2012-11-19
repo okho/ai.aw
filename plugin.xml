@@ -2,8 +2,13 @@
 <?eclipse version="3.7"?>
 <plugin>
     <extension point="org.eclipse.equinox.http.registry.servlets">
-        <servlet alias="/" class="ai.svl.WelcomeServlet" />
+        <servlet alias="/test" class="ai.svl.TestServlet" />
     </extension>
+    
+    <extension point="org.eclipse.equinox.http.registry.resources">
+        <resource alias="/" base-name="/web_files"/>
+    </extension>
+    
     <extension
           id="product"
           point="org.eclipse.core.runtime.products">
