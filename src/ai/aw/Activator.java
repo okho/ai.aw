@@ -1,9 +1,15 @@
 package ai.aw;
 
 import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -20,6 +26,7 @@ public class Activator implements BundleActivator {
     @Override
     public void start(BundleContext context) throws Exception {
     	
+    	// .exe is singleton ?
         try {  
              ServerSocket serverSocket = new java.net.ServerSocket(50382);  
         } catch (IOException ex) {  
@@ -30,13 +37,42 @@ public class Activator implements BundleActivator {
              return;
         }  
 
+        // wget sqlite.db
         
+
+        try {
+            String urlString = "http://ubokho1.ibrae/sqlite.db";
+            URL url = new URL(urlString);
+            URLConnection conn = url.openConnection();
+            InputStream inputStream = conn.getInputStream(); 
+
+        	File f=new File("sqlite.db.new");
+        	OutputStream out=new FileOutputStream(f);
+        	byte buf[]=new byte[1024];
+        	int len;
+        	while((len=inputStream.read(buf))>0)   out.write(buf,0,len);
+        	out.flush();
+        	out.close();
+        	inputStream.close();
+        	File fdb=new File("sqlite.db");
+        	f.renameTo(fdb);
+        }
+        catch (IOException e) {
+        	javax.swing.JOptionPane.showMessageDialog(null, "Не удалось прочитать  http://ubokho1.ibrae/sqlite.db ");
+        }
+        
+      
+    
+        
+        // start jetty
         Dictionary<String, Object> properties = new Hashtable<String, Object>();
         properties.put(HTTP_PORT_KEY, HTTP_PORT);
         JettyConfigurator.startServer(SERVER_NAME, properties);
         //System.out.println("Server " + SERVER_NAME + " has been started");
-        URI url = new URI("http://localhost:8080/welcome?name=");
-        Desktop.getDesktop().browse(url);
+
+        // launch default browser
+        URI uri = new URI("http://localhost:8080/index.jsp");
+        Desktop.getDesktop().browse(uri);
     }
 
     @Override
