@@ -3,7 +3,6 @@
 
 <product name="aw" uid="aw" id="ai.aw.product" application="org.eclipse.ant.ui.antRunner" version="1.0.2" useFeatures="false" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -14,7 +13,6 @@
 
    <windowImages/>
 
-
    <launcher name="aw">
       <solaris/>
       <win useIco="false">
@@ -22,14 +20,15 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
    <plugins>
       <plugin id="ai.aw"/>
+      <plugin id="ai.aw.sqlite.jdbc"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
+      <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.commons.el"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.jasper"/>

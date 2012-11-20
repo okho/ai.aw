@@ -37,9 +37,20 @@ public class Activator implements BundleActivator {
              return;
         }  
 
-        // wget sqlite.db
-        
+        // start jetty
+        Dictionary<String, Object> properties = new Hashtable<String, Object>();
+        properties.put(HTTP_PORT_KEY, HTTP_PORT);
+        JettyConfigurator.startServer(SERVER_NAME, properties);
+        //System.out.println("Server " + SERVER_NAME + " has been started");
+        Thread.sleep(5000);  
 
+        
+        // launch default browser
+        double r = Math.random();
+        URI uri = new URI("http://localhost:8080/index.jsp?id="+r);
+        Desktop.getDesktop().browse(uri);
+        
+        // wget sqlite.db
         try {
             String urlString = "http://ubokho1.ibrae/sqlite.db";
             URL url = new URL(urlString);
@@ -60,19 +71,7 @@ public class Activator implements BundleActivator {
         catch (IOException e) {
         	javax.swing.JOptionPane.showMessageDialog(null, "Не удалось прочитать  http://ubokho1.ibrae/sqlite.db ");
         }
-        
-      
-    
-        
-        // start jetty
-        Dictionary<String, Object> properties = new Hashtable<String, Object>();
-        properties.put(HTTP_PORT_KEY, HTTP_PORT);
-        JettyConfigurator.startServer(SERVER_NAME, properties);
-        //System.out.println("Server " + SERVER_NAME + " has been started");
-
-        // launch default browser
-        URI uri = new URI("http://localhost:8080/index.jsp");
-        Desktop.getDesktop().browse(uri);
+ 
     }
 
     @Override
