@@ -30,5 +30,12 @@ public class TestServlet extends HttpServlet
         {
             e.printStackTrace();
         }
+        
+        try {
+			response.sendRedirect("index.jsp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
     }
 }

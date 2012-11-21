@@ -3,10 +3,12 @@
 
 <product name="aw" uid="aw" id="ai.aw.product" application="org.eclipse.ant.ui.antRunner" version="1.0.2" useFeatures="false" includeLaunchers="true">
 
+
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
+      <programArgs>-console</programArgs>
       <vmArgs>-Declipse.ignoreApp=true -Dosgi.noShutdown=true</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
@@ -20,12 +22,14 @@
       </win>
    </launcher>
 
+
    <vm>
    </vm>
 
+
    <plugins>
       <plugin id="ai.aw"/>
-      <plugin id="ai.aw.sqlite.jdbc"/>
+      <plugin id="ai.aw.jdbc.sqlite"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
       <plugin id="javax.transaction" fragment="true"/>
@@ -48,9 +52,16 @@
 
    <configurations>
       <plugin id="ai.aw" autoStart="true" startLevel="0" />
+      <plugin id="javax.servlet" autoStart="true" startLevel="0" />
+      <plugin id="javax.servlet.jsp" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.jasper" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.http.registry" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.http.servlet" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.jsp.jasper" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.jsp.jasper.registry" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.registry" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.osgi" autoStart="true" startLevel="0" />
+      <plugin id="org.mortbay.jetty.server" autoStart="true" startLevel="0" />
    </configurations>
 
 </product>
