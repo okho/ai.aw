@@ -44,7 +44,6 @@ public class Activator implements BundleActivator {
         //System.out.println("Server " + SERVER_NAME + " has been started");
         Thread.sleep(5000);  
 
-        
         // launch default browser
         double r = Math.random();
         URI uri = new URI("http://localhost:8080/index.jsp?id="+r);
