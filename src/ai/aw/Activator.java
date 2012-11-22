@@ -17,10 +17,12 @@ import org.eclipse.equinox.http.jetty.JettyConfigurator;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+
 public class Activator implements BundleActivator {
 
+	
     private static final String HTTP_PORT_KEY = "http.port";
-    private static final int HTTP_PORT = 8080;
+    private static final int HTTP_PORT = 8088;
     private static final String SERVER_NAME = "demojetty";
 
     @Override
@@ -42,14 +44,15 @@ public class Activator implements BundleActivator {
         properties.put(HTTP_PORT_KEY, HTTP_PORT);
         JettyConfigurator.startServer(SERVER_NAME, properties);
         //System.out.println("Server " + SERVER_NAME + " has been started");
-        Thread.sleep(5000);  
+        //Thread.sleep(5000);  
 
         // launch default browser
         double r = Math.random();
-        URI uri = new URI("http://localhost:8080/index.jsp?id="+r);
+        URI uri = new URI("http://localhost:8088/index.jsp?id="+r);
         Desktop.getDesktop().browse(uri);
         
         // wget sqlite.db
+        
         try {
             String urlString = "http://ubokho1.ibrae/sqlite.db";
             URL url = new URL(urlString);
@@ -65,7 +68,9 @@ public class Activator implements BundleActivator {
         	out.close();
         	inputStream.close();
         	File fdb=new File("sqlite.db");
+        	fdb.delete();
         	f.renameTo(fdb);
+        	//sqlite = new Sqlite();
         }
         catch (IOException e) {
         	javax.swing.JOptionPane.showMessageDialog(null, "Не удалось прочитать  http://ubokho1.ibrae/sqlite.db ");
