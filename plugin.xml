@@ -2,7 +2,7 @@
 <?eclipse version="3.7"?>
 <plugin>
     <extension point="org.eclipse.equinox.http.registry.servlets">
-        <servlet alias="/test" class="ai.svl.TestServlet" />
+        <servlet alias="/run" class="ai.svl.RunServlet" />
         <servlet alias="/*.jsp" class="org.eclipse.equinox.jsp.jasper.registry.JSPFactory:/web_files" />
     </extension>
     

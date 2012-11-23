@@ -29,18 +29,11 @@ div#header{clear:left;width:1350px}
 <body>
 
 <%
-  String ipparam="",macparam="",descparam = "";
+    String ipparam="",macparam="",descparam = "";
 
-  
-  if ("IP".equals(request.getParameter("CRITERIA"))) {
-    ipparam = request.getParameter("PARAMETER").trim();
-  }
-  if ("MAC".equals(request.getParameter("CRITERIA"))) {
-    macparam = request.getParameter("PARAMETER").trim();
-  }
-  if ("DESCR".equals(request.getParameter("CRITERIA"))) {
-    descparam = request.getParameter("PARAMETER").trim();
-  }
+	if (request.getParameter("FIND_IP") != null) ipparam = request.getParameter("FIND_IP").trim();
+	if (request.getParameter("FIND_MAC") != null) macparam = request.getParameter("FIND_MAC").trim();
+	if (request.getParameter("FIND_DESCR") != null) descparam = request.getParameter("FIND_DESCR").trim();
   
 %>
 
@@ -48,81 +41,17 @@ div#header{clear:left;width:1350px}
 <div id="header">
 <h1>IP PLAN - Internal</h1>
 <p>
-<form name="form1" method="post" action="main.jsp">
-<input type="text" name="PARAMETER" value="<%=ipparam%>"><input type="submit" value="> IP адрес"><input type="hidden" name="CRITERIA" value="IP">
+<form name="form1" method="post" action="run">
+<input type="text" name="FIND_IP" value="<%=ipparam%>"><input type="submit" value="> IP адрес">
 </form>
 <form name="form3" method="post" action="main.jsp">
-<input type="text" name="PARAMETER" value="<%=macparam%>"><input type="submit" value="> MAC адрес"><input type="hidden" name="CRITERIA" value="MAC">
+<input type="text" name="FIND_MAC" value="<%=macparam%>"><input type="submit" value="> MAC адрес">
 </form>
 <form name="form2" method="post" action="main.jsp">
-<input type="text" name="PARAMETER" value="<%=descparam%>"><input type="submit" value="> Розетка,Описание"><input type="hidden" name="CRITERIA" value="DESCR">
+<input type="text" name="FIND_DESCR" value="<%=descparam%>"><input type="submit" value="> Розетка,Описание">
 </form>
 </p>
 
 </div>
 </div>
-
-<%
-if ("IP".equals(request.getParameter("CRITERIA"))) {
-	out.println("PATHResource="+request.getSession().getServletContext().getResource("/")+"FIN");
-	//out.println("PATHEntry="+request.getSession().getServletContext().getEntry("/")+"FIN");
-	//out.println("PATHDataFile="+request.getSession().getServletContext().getDataFile("/")+"FIN");
-	
-	Sqlite sqlite = new Sqlite();
-	out.println(sqlite.showIP(ipparam));
-}	
-
-%>
-<!--
-///////////////////////////////////////////////////////////////////////////////
-/////// IP search /////////////////////////////////////////////////////////////
-  if ("IP".equals(request.getParameter("CRITERIA"))) {
-
-    $query = "SELECT * FROM ipdesc WHERE ip = '{$ipparam}'";
-    mysql_query($query);
-    $result = mysql_query($query);
-    while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
-      printf("IP: %s  descr: %s <br>", $row[0], $row[2]);
-    }
-    mysql_free_result($result);
-
-
-//    $query = "SELECT * FROM arp WHERE ip IN (SELECT ip FROM arp WHERE mac IN (SELECT mac FROM arp WHERE ip='{$ipparam}'))";
-    $query = "SELECT * FROM arp WHERE ip = '{$ipparam}' ORDER BY timelast DESC";
-    mysql_query($query);
-    $result = mysql_query($query);
-    while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
-      printf("IP: %s  MAC: %s  last: %s <br>", $row[1], $row[3], $row[5]); 
-      $query2 = "SELECT * FROM ports WHERE mac = '{$row[3]}' ORDER BY timelast DESC";
-      $result2 = mysql_query($query2);
-      while ($row2 = mysql_fetch_array($result2, MYSQL_NUM)) {
-        printf("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ipsw: %s  port: %s  last: %s <br>", $row2[4], $row2[3], $row2[6]);
-
-        $query3 = "SELECT * FROM crossport WHERE ipsw = '{$row2[4]}' AND port = '{$row2[3]}'"; 
-        $result3 = mysql_query($query3);
-        while ($row3 = mysql_fetch_array($result3, MYSQL_NUM)) {
-          printf("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Розетка: %s <br>", $row3[1]);
-
-        }
-        mysql_free_result($result3);
-
-        $query3 = "SELECT * FROM ports WHERE ipsw = '{$row2[4]}' AND port = '{$row2[3]}' ORDER BY timelast DESC";
-        $result3 = mysql_query($query3);
-        if(mysql_num_rows($result3) > 1) {
-        while ($row3 = mysql_fetch_array($result3, MYSQL_NUM)) {
-          printf("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAC: %s  last: %s <br>", $row3[2], $row3[6]);
-
-        }
-        }
-        mysql_free_result($result3);
-
-      } 
-      mysql_free_result($result2); 
-    }
-    mysql_free_result($result);
-
-  }
-///////////////////////////////////////////////////////////////////////////////
-
--->
 
