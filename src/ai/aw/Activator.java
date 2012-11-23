@@ -48,7 +48,7 @@ public class Activator implements BundleActivator {
 
         // launch default browser
         double r = Math.random();
-        URI uri = new URI("http://localhost:8088/index.jsp?id="+r);
+        URI uri = new URI("http://localhost:8088/run?id="+r);
         Desktop.getDesktop().browse(uri);
         
         // wget sqlite.db
