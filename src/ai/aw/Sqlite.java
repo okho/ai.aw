@@ -120,5 +120,41 @@ public class Sqlite {
 	    return res;
 	}
 	
+//////FIND MAC //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+	public String findMAC(String textIP) {
+			String res="", ip, ipsw, port, descr, mac , timelast;
+			PreparedStatement st=null;
+			ResultSet rs=null;
+
+			SqliteInit();
+
+			
+			
+			
+			
+			
+			
+		return res;
+	}
+//////FIND DESCR //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+	public String findDESCR(String textDESCR) {
+		String res="", ip, ipsw, port, descr, mac , timelast;
+		PreparedStatement st=null;
+		ResultSet rs=null;
+
+		SqliteInit();
+
+
+
+
+
+
+
+		return res;
+	}
+
+
 }
 
