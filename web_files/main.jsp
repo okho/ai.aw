@@ -44,10 +44,10 @@ div#header{clear:left;width:1350px}
 <form name="form1" method="post" action="run">
 <input type="text" name="FIND_IP" value="<%=ipparam%>"><input type="submit" value="> IP адрес">
 </form>
-<form name="form3" method="post" action="main.jsp">
+<form name="form3" method="post" action="run">
 <input type="text" name="FIND_MAC" value="<%=macparam%>"><input type="submit" value="> MAC адрес">
 </form>
-<form name="form2" method="post" action="main.jsp">
+<form name="form2" method="post" action="run">
 <input type="text" name="FIND_DESCR" value="<%=descparam%>"><input type="submit" value="> Розетка,Описание">
 </form>
 </p>
