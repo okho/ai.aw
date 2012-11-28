@@ -123,7 +123,7 @@ public class Sqlite {
 //////FIND MAC //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 	public String findMAC(String textMAC) {
-			String res="", ip, ipsw, port, descr, mac , socket, timecreate, timelast;
+			String res="", ip, ipsw, port, mac , socket, timecreate, timelast;
 			PreparedStatement st=null;
 			ResultSet rs=null;
 
@@ -163,22 +163,16 @@ public class Sqlite {
 			    while (rs.next()) {
 			    	ipsw = rs.getString("ipsw");
 			    	port = rs.getString("port");
+			    	timecreate = rs.getString("timecreate");
+			    	timelast = rs.getString("timelast");
+
 
 			    	PreparedStatement st2 = con.prepareStatement ("SELECT * FROM crossport WHERE ipsw = ? AND port = ?"); 
 			    	st2.setString (1, ipsw); 
 			    	st2.setString (2, port); 
 			    	ResultSet rs2 = st2.executeQuery();
-				    while (rs2.next()) {
-				    	socket = rs2.getString("socket");
-				    	ipsw = rs2.getString("ipsw");
-				    	port = rs2.getString("port");
-				    	timecreate = rs.getString("timecreate");
-				    	timelast = rs.getString("timelast");
-				    	res += "Розетка: " + socket + " ipsw: " + ipsw + " port: " + port + " create: " + timecreate + " last: " + timelast + " \n";
-			    
-			    
-				    }
-			    
+			    	socket = rs2.getString("socket");
+			    	res += "Розетка: " + socket + " ipsw: " + ipsw + " port: " + port + " create: " + timecreate + " last: " + timelast + " \n";
 			    }
 			} 
 			catch (SQLException e1) {

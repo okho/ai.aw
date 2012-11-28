@@ -32,7 +32,7 @@ public class Activator implements BundleActivator {
         try {  
              ServerSocket serverSocket = new java.net.ServerSocket(50382);  
         } catch (IOException ex) {  
-             javax.swing.JOptionPane.showMessageDialog(null, "aw уже запущен.  http://localhost:8080/ ");
+             javax.swing.JOptionPane.showMessageDialog(null, "aw уже запущен.  http://localhost:8080/run ");
              this.stop(context);
              context.getBundle(0).stop();
              System.exit(0);
