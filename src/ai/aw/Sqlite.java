@@ -171,7 +171,8 @@ public class Sqlite {
 			    	st2.setString (1, ipsw); 
 			    	st2.setString (2, port); 
 			    	ResultSet rs2 = st2.executeQuery();
-			    	socket = rs2.getString("socket");
+			    	socket = "";
+			    	while (rs2.next()) 	socket = rs2.getString("socket");
 			    	res += "Розетка: " + socket + " ipsw: " + ipsw + " port: " + port + " create: " + timecreate + " last: " + timelast + " \n";
 			    }
 			} 
