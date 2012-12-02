@@ -8,12 +8,12 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-console</programArgs>
       <vmArgs>-Declipse.ignoreApp=true -Dosgi.noShutdown=true</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
    <windowImages/>
+
 
    <launcher name="aw">
       <solaris/>
