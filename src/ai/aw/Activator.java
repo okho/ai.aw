@@ -23,7 +23,7 @@ public class Activator implements BundleActivator {
 	
     private static final String HTTP_PORT_KEY = "http.port";
     private static final int HTTP_PORT = 8088;
-    private static final String SERVER_NAME = "demojetty";
+    private static final String SERVER_NAME = "awjetty";
 
     @Override
     public void start(BundleContext context) throws Exception {
@@ -32,7 +32,12 @@ public class Activator implements BundleActivator {
         try {  
              ServerSocket serverSocket = new java.net.ServerSocket(50382);  
         } catch (IOException ex) {  
-             javax.swing.JOptionPane.showMessageDialog(null, "aw уже запущен.  http://localhost:8080/run ");
+//             javax.swing.JOptionPane.showMessageDialog(null, "aw уже запущен.  http://localhost:8080/run ");
+            // launch default browser
+             double r = Math.random();
+             URI uri = new URI("http://localhost:8088/run?id="+r);
+             Desktop.getDesktop().browse(uri);
+
              this.stop(context);
              context.getBundle(0).stop();
              System.exit(0);
