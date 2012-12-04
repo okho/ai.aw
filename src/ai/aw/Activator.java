@@ -16,6 +16,7 @@ import java.util.Hashtable;
 import org.eclipse.equinox.http.jetty.JettyConfigurator;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 
 
 public class Activator implements BundleActivator {
@@ -38,10 +39,16 @@ public class Activator implements BundleActivator {
              URI uri = new URI("http://localhost:8088/run?id="+r);
              Desktop.getDesktop().browse(uri);
 
-             this.stop(context);
+/*             this.stop(context);
              context.getBundle(0).stop();
+             System.exit(0);*/
+             
+             final BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
+             if ( bundleContext != null) {
+            	 bundleContext.getBundle(0).stop();
+             }
+             
              System.exit(0);
-             return;
         }  
 
         // start jetty
@@ -56,30 +63,9 @@ public class Activator implements BundleActivator {
         URI uri = new URI("http://localhost:8088/run?id="+r);
         Desktop.getDesktop().browse(uri);
         
-        // wget sqlite.db
+        Sqlite sqlite = new Sqlite();
+        sqlite.LoadDB();
         
-        try {
-            String urlString = "http://ubokho1.ibrae/sqlite.db";
-            URL url = new URL(urlString);
-            URLConnection conn = url.openConnection();
-            InputStream inputStream = conn.getInputStream(); 
-
-        	File f=new File("sqlite.db.new");
-        	OutputStream out=new FileOutputStream(f);
-        	byte buf[]=new byte[1024];
-        	int len;
-        	while((len=inputStream.read(buf))>0)   out.write(buf,0,len);
-        	out.flush();
-        	out.close();
-        	inputStream.close();
-        	File fdb=new File("sqlite.db");
-        	fdb.delete();
-        	f.renameTo(fdb);
-        	//sqlite = new Sqlite();
-        }
-        catch (IOException e) {
-        	javax.swing.JOptionPane.showMessageDialog(null, "Не удалось прочитать  http://ubokho1.ibrae/sqlite.db ");
-        }
  
     }
 

@@ -1,5 +1,12 @@
 package ai.aw;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -35,6 +42,35 @@ public class Sqlite {
 		}
 		
 	}
+	
+	void LoadDB() {
+		
+       // wget sqlite.db
+        try {
+            String urlString = "http://ubokho1.ibrae/sqlite.db";
+            URL url = new URL(urlString);
+            URLConnection conn = url.openConnection();
+            InputStream inputStream = conn.getInputStream(); 
+
+        	File f=new File("sqlite.db.new");
+        	OutputStream out=new FileOutputStream(f);
+        	byte buf[]=new byte[1024];
+        	int len;
+        	while((len=inputStream.read(buf))>0)   out.write(buf,0,len);
+        	out.flush();
+        	out.close();
+        	inputStream.close();
+        	File fdb=new File("sqlite.db");
+        	fdb.delete();
+        	f.renameTo(fdb);
+        	//sqlite = new Sqlite();
+        }
+        catch (IOException e) {
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Не удалось прочитать  http://ubokho1.ibrae/sqlite.db ");
+        }
+		
+	}
+	
 //////  FIND IP //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 	public String findIP(String textIP) {
