@@ -24,6 +24,8 @@ public class RunServlet extends HttpServlet
           forward = "/find_mac.jsp";
         } else if (parameters.containsKey("FIND_DESCR")){
           forward = "/find_descr.jsp";
+        } else if (parameters.containsKey("LOAD_DB")){
+            forward = "/load_db.jsp";
         } else {
           forward = "/main.jsp";
         }
@@ -40,6 +42,8 @@ public class RunServlet extends HttpServlet
           forward = "/find_mac.jsp";
         } else if (parameters.containsKey("FIND_DESCR")){
           forward = "/find_descr.jsp";
+        } else if (parameters.containsKey("LOAD_DB")){
+            forward = "/load_db.jsp";
         } else {
           forward = "/main.jsp";
         }

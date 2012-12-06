@@ -63,9 +63,7 @@ public class Activator implements BundleActivator {
         URI uri = new URI("http://localhost:8088/run?id="+r);
         Desktop.getDesktop().browse(uri);
         
-        Sqlite sqlite = new Sqlite();
-        sqlite.LoadDB();
-        
+     
  
     }
 

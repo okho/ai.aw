@@ -55,3 +55,6 @@ div#header{clear:left;width:1350px}
 </div>
 </div>
 
+<form name="form2" method="post" action="run">
+<input type="submit" value="refresh DataBase"><input type="hidden" name="LOAD_DB" value="LOAD_DB">
+</form>

@@ -43,7 +43,7 @@ public class Sqlite {
 		
 	}
 	
-	void LoadDB() {
+	public String LoadDB() {
 		
        // wget sqlite.db
         try {
@@ -64,9 +64,11 @@ public class Sqlite {
         	fdb.delete();
         	f.renameTo(fdb);
         	//sqlite = new Sqlite();
+        	return "База данных успешно обновлена с http://ubokho1.ibrae/sqlite.db ";
         }
         catch (IOException e) {
         	//javax.swing.JOptionPane.showMessageDialog(null, "Не удалось прочитать  http://ubokho1.ibrae/sqlite.db ");
+        	return "Error. Не удалось прочитать  http://ubokho1.ibrae/sqlite.db ";
         }
 		
 	}
